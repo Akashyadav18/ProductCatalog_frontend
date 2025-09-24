@@ -12,6 +12,8 @@ const Category = () => {
     const {categoryData, error, loading, products} = useContext(dataContext);
 
     if (loading) return <h2>LoadingData...</h2>
+    if (loading) return <h2>Please wait for few seconds because Backend is deployed on Render and it take to start</h2>
+    if(loading) return <h2>If after few seconds it not started simply refresh the page.</h2>
     if (error) return <p>Error : ${error.message}</p>
 
     const handleCategorySelect = (categoryId) => {
