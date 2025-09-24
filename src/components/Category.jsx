@@ -9,11 +9,17 @@ const Category = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [sortOrder, setSortOrder] = useState("asc");
 
-    const {categoryData, error, loading, products} = useContext(dataContext);
+    const { categoryData, error, loading, products } = useContext(dataContext);
 
-    if (loading) return <h2>LoadingData...</h2>
-    if (loading) return <h2>Please wait for few seconds because Backend is deployed on Render and it take to start</h2>
-    if(loading) return <h2>If after few seconds it not started simply refresh the page.</h2>
+    if (loading) {
+        return (
+            <div className=' text-xl font-bold text-center text-white'>
+                <h2>LoadingData...</h2>
+                <h2>Please wait for few seconds because Backend is deployed on Render and it takes time to start</h2>
+                <h2>If after few seconds it does not start, simply refresh the page.</h2>
+            </div>
+        );
+    }
     if (error) return <p>Error : ${error.message}</p>
 
     const handleCategorySelect = (categoryId) => {
@@ -23,11 +29,11 @@ const Category = () => {
     const filteredProducts = products.filter((product) => {
         return (
             selectedCategory ? product.category.id === selectedCategory : true
-            &&
-            product.name.toLowerCase().includes(searchTerm.toLowerCase())
+                &&
+                product.name.toLowerCase().includes(searchTerm.toLowerCase())
         )
-    }).sort((a,b) =>{
-        if(sortOrder === "asc"){
+    }).sort((a, b) => {
+        if (sortOrder === "asc") {
             return a.price - b.price;
         } else {
             return b.price - a.price
@@ -77,7 +83,7 @@ const Category = () => {
                 </div>
             </div>
             <div>
-                <Products filteredProducts={filteredProducts}/>
+                <Products filteredProducts={filteredProducts} />
             </div>
         </>
     )
